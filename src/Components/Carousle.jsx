@@ -1,36 +1,86 @@
- const Carosule = () => {
+ const Carousle = () => {
+  const slides = [
+    {
+      title: "Sony CH710N Headphones",
+      desc: "Wireless Noise Cancelling | 35 Hours Battery Life",
+      price: "₹7,999",
+      img: "/assets/images/sonyCh710n-1.png",
+    },
+    {
+      title: "Boat Airdopes 131",
+      desc: "Bluetooth Earbuds | 60 Hours Playback | Fast Charging",
+      price: "₹1,099",
+      img: "/assets/images/boat131-1.png",
+    },
+    {
+      title: "JBL 100 Headphones",
+      desc: "Powerful Bass | Foldable Design | Comfortable Fit",
+      price: "₹2,499",
+      img: "/assets/images/jbl100-1.png",
+    },
+  ];
+
   return (
-    <div
-      id="mainCarousel"
-      className="carousel slide"
-      data-bs-ride="carousel"
-      style={{ background: "#111" }}
-    >
-      <div className="carousel-inner">
-
-        <div className="carousel-item active">
-          <img src="/images/products/banner1.png" className="d-block w-100" alt="banner1" />
-        </div>
-
-        <div className="carousel-item">
-          <img src="/images/products/banner2.png" className="d-block w-100" alt="banner2" />
-        </div>
-
-        <div className="carousel-item">
-          <img src="/images/products/banner3.png" className="d-block w-100" alt="banner3" />
-        </div>
-
+    <div id="heroCarousel" className="carousel slide bg-dark" data-bs-ride="carousel">
+      <div className="carousel-indicators bg-dark">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            data-bs-target="#heroCarousel"
+            data-bs-slide-to={index}
+            className={index === 0 ? "active" : ""}
+          ></button>
+        ))}
       </div>
 
-      <button className="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+      <div className="carousel-inner">
+        {slides.map((slide, index) => (
+          <div
+            className={`carousel-item ${index === 0 ? "active" : ""}`}
+            key={index}
+          >
+            <div className="container py-5">
+              <div className="row align-items-center">
+                <div className="col-md-6 text-white">
+                  <h2>{slide.title}</h2>
+                  <p>{slide.desc}</p>
+                  <h4>{slide.price}</h4>
+                  <button className="btn btn-danger mt-2">Add to Cart</button>
+                </div>
+
+                <div className="col-md-6 text-center">
+                  <img
+                    src={slide.img}
+                    className="img-fluid"
+                    style={{ height: "350px", objectFit: "contain" }}
+                    alt="product"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide="prev"
+      >
         <span className="carousel-control-prev-icon"></span>
       </button>
 
-      <button className="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide="next"
+      >
         <span className="carousel-control-next-icon"></span>
       </button>
     </div>
   );
 };
-export default Carosule;
-
+export default Carousle;
