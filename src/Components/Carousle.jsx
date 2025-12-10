@@ -1,27 +1,31 @@
- const Carousle = () => {
+const Carousle = () => {
   const slides = [
     {
       title: "Sony CH710N Headphones",
       desc: "Wireless Noise Cancelling | 35 Hours Battery Life",
       price: "₹7,999",
-      img: "/assets/images/sonyCh710n-1.png",
+      img: "/images/products/sonyCh710n-1.png",
     },
     {
       title: "Boat Airdopes 131",
       desc: "Bluetooth Earbuds | 60 Hours Playback | Fast Charging",
       price: "₹1,099",
-      img: "/assets/images/boat131-1.png",
+      img: "/images/products/boat131-1.png",
     },
     {
       title: "JBL 100 Headphones",
       desc: "Powerful Bass | Foldable Design | Comfortable Fit",
       price: "₹2,499",
-      img: "/assets/images/jbl100-1.png",
+      img: "/images/products/jbl100-1.png",
     },
   ];
 
   return (
-    <div id="heroCarousel" className="carousel slide bg-dark" data-bs-ride="carousel">
+    <div
+      id="heroCarousel"
+      className="carousel slide bg-dark"
+      data-bs-ride="carousel"
+    >
       <div className="carousel-indicators bg-dark">
         {slides.map((_, index) => (
           <button
@@ -83,4 +87,5 @@
     </div>
   );
 };
+
 export default Carousle;
