@@ -1,133 +1,170 @@
-import React from "react";
+import React, { useState } from "react";
+import productsData from "../ProductsData/ProductsData";
 
 const Home = () => {
-  return (
-    <div className="home-container">
+  // Category Filter for Top Products
+  const [activeFilter, setActiveFilter] = useState("All");
 
-      {/* Banner Section */}
-      <div className="banner">
+  // Filtered Top Products
+  const filteredProducts =
+    activeFilter === "All"
+      ? productsData
+      : productsData.filter((p) => p.category === activeFilter);
+
+  return (
+    <div style={{ backgroundColor: "#0d0d0d", color: "white" }}>
+      
+   
+      <div className="container py-4">
         <img
           src="/images/products/banner1.png"
-          className="banner-img"
-          alt="Banner"
+          alt="Main Banner"
+          style={{
+            width: "100%",
+            borderRadius: "12px",
+            objectFit: "cover",
+          }}
         />
       </div>
 
-      {/* Categories Section */}
+      {/* ===================== FEATURED PRODUCTS ===================== */}
       <div className="container mt-5">
-        <h2 className="text-center fw-bold mb-4">Shop by Category</h2>
+        <h3 className="text-center fw-bold mb-4">Featured Products</h3>
+
+        <div className="row g-4">
+          {productsData.slice(0, 4).map((item) => (
+            <div className="col-md-3 col-6" key={item.id}>
+              <div
+                style={{
+                  background: "#111",
+                  padding: "15px",
+                  borderRadius: "12px",
+                  textAlign: "center",
+                  border: "1px solid #222",
+                }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  style={{ width: "100%", height: "180px", objectFit: "contain" }}
+                />
+                <h6 className="mt-2">{item.title}</h6>
+
+                <p className="m-0 fw-bold text-danger">₹{item.finalPrice}</p>
+                <p className="text-secondary" style={{ textDecoration: "line-through" }}>
+                  ₹{item.originalPrice}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ===================== TOP PRODUCTS WITH FILTER ===================== */}
+      <div className="container mt-5">
+
+        <h3 className="text-center fw-bold mb-4">Top Products</h3>
+
+        {/* Filter Buttons */}
+        <div className="d-flex justify-content-center gap-3 mb-4">
+          {["All", "Headphones", "Earbuds", "Earphones", "Neckbands"].map(
+            (cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                style={{
+                  border: "none",
+                  padding: "8px 18px",
+                  borderRadius: "20px",
+                  background: activeFilter === cat ? "#e70404" : "#222",
+                  color: activeFilter === cat ? "white" : "#aaa",
+                  cursor: "pointer",
+                }}
+              >
+                {cat}
+              </button>
+            )
+          )}
+        </div>
+
+        {/* Product Cards */}
+        <div className="row g-4">
+          {filteredProducts.map((p) => (
+            <div className="col-md-3 col-sm-6" key={p.id}>
+              <div
+                style={{
+                  background: "#111",
+                  borderRadius: "12px",
+                  padding: "15px",
+                  border: "1px solid #222",
+                  textAlign: "center",
+                }}
+              >
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  style={{
+                    width: "100%",
+                    height: "180px",
+                    objectFit: "contain",
+                  }}
+                />
+
+                <h6 className="mt-3">{p.title}</h6>
+
+                <p className="text-danger fw-bold">₹{p.finalPrice}</p>
+
+                <p
+                  className="text-secondary"
+                  style={{ textDecoration: "line-through" }}
+                >
+                  ₹{p.originalPrice}
+                </p>
+
+                <button
+                  style={{
+                    width: "100%",
+                    padding: "8px",
+                    background: "#e70404",
+                    border: "none",
+                    borderRadius: "6px",
+                    color: "white",
+                  }}
+                >
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ===================== OUR ADVANTAGES ===================== */}
+      <div className="container mt-5 py-5 text-center">
+        <h4 className="fw-bold mb-4">Our Advantages</h4>
 
         <div className="row text-center g-4">
           <div className="col-md-3 col-6">
-            <div className="category-card">
-              <img src="/images/products/cat1.png" alt="Category 1" />
-              <p className="mt-2">Category 1</p>
-            </div>
+            <img src="/images/products/delivery.png" width="60" />
+            <p className="mt-2">Express Delivery</p>
           </div>
 
           <div className="col-md-3 col-6">
-            <div className="category-card">
-              <img src="/images/products/cat2.png" alt="Category 2" />
-              <p className="mt-2">Category 2</p>
-            </div>
+            <img src="/images/products/warranty.png" width="60" />
+            <p className="mt-2">Brand Warranty</p>
           </div>
 
           <div className="col-md-3 col-6">
-            <div className="category-card">
-              <img src="/images/products/cat3.png" alt="Category 3" />
-              <p className="mt-2">Category 3</p>
-            </div>
+            <img src="/images/products/deals.png" width="60" />
+            <p className="mt-2">Exciting Deals</p>
           </div>
 
           <div className="col-md-3 col-6">
-            <div className="category-card">
-              <img src="/images/products/cat4.png" alt="Category 4" />
-              <p className="mt-2">Category 4</p>
-            </div>
+            <img src="/images/products/secure.png" width="60" />
+            <p className="mt-2">Secure Payments</p>
           </div>
         </div>
       </div>
-
-      {/* Featured Products */}
-      <div className="container mt-5">
-        <h2 className="text-center fw-bold mb-4">Featured Products</h2>
-
-        <div className="row g-4">
-          <div className="col-md-3 col-6">
-            <div className="product-card">
-              <img src="/images/products/p1.png" alt="Product 1" />
-              <h6 className="mt-2">Product 1</h6>
-              <p>₹799</p>
-            </div>
-          </div>
-
-          <div className="col-md-3 col-6">
-            <div className="product-card">
-              <img src="/images/products/p2.png" alt="Product 2" />
-              <h6 className="mt-2">Product 2</h6>
-              <p>₹999</p>
-            </div>
-          </div>
-
-          <div className="col-md-3 col-6">
-            <div className="product-card">
-              <img src="/images/products/p3.png" alt="Product 3" />
-              <h6 className="mt-2">Product 3</h6>
-              <p>₹559</p>
-            </div>
-          </div>
-
-          <div className="col-md-3 col-6">
-            <div className="product-card">
-              <img src="/images/products/p4.png" alt="Product 4" />
-              <h6 className="mt-2">Product 4</h6>
-              <p>₹499</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Inline CSS */}
-      <style>{`
-        .home-container {
-          background-color: #fafafa;
-          padding-bottom: 40px;
-        }
-
-        .banner-img {
-          width: 100%;
-          height: auto;
-          border-radius: 10px;
-        }
-
-        .category-card, 
-        .product-card {
-          background: white;
-          border-radius: 12px;
-          padding: 15px;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-          transition: 0.3s ease;
-          cursor: pointer;
-        }
-
-        .category-card:hover, 
-        .product-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-
-        .category-card img,
-        .product-card img {
-          width: 100%;
-          border-radius: 10px;
-        }
-
-        .product-card p {
-          margin: 0;
-          font-weight: bold;
-          color: #444;
-        }
-      `}</style>
     </div>
   );
 };
