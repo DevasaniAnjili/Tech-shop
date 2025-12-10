@@ -1,0 +1,22 @@
+body{
+  color: black;
+}
+/* Make all input placeholders white */
+::placeholder {
+  color: #ffffff !important;
+  opacity: 1; /* makes placeholder fully visible */
+}
+
+/* For better compatibility across browsers */
+input::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+input::-moz-placeholder {
+  color: #ffffff !important;
+}
+input:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+input::-ms-input-placeholder {
+  color: #ffffff !important;
+}
